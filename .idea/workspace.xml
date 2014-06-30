@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d0a910db-12cb-4ffa-9577-3bac803fbb24" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/graph/graph.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/graph/test_graph.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="d0a910db-12cb-4ffa-9577-3bac803fbb24" name="Default" comment="" />
     <ignored path="data_structures1.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="d0a910db-12cb-4ffa-9577-3bac803fbb24" time="1402948062590" ignored="false" />
@@ -176,7 +172,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="options.lastSelected" value="appearance" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Network_tools2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../learning_journal" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
   </component>
