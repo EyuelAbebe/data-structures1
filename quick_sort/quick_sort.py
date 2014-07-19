@@ -13,7 +13,6 @@ def time_it(method):
     
     return timed
 
-
 @time_it
 def quick_sort(unsorted_list):
     if len(unsorted_list) < 2 :
@@ -37,9 +36,8 @@ def quick_sort(unsorted_list):
 
         return new_less + equal + new_greater
 
-
 if __name__ == '__main__':
-    best = [i for i in range(1000)]
+    best = [i+1 for i in range(1000)]
     worst = best[::-1]
 
     quick_sort(best)
