@@ -4,6 +4,7 @@ class Node(object):
         self.l_child = l_child
         self.r_child = r_child
         self.parent = parent
+        self.balance_factor = 0
 
     def __repr__(self):
         return '<value: {node.value}>'.format(node=self)
@@ -63,6 +64,7 @@ class BST(object):
                 self._insert(val, node.l_child)
             else:
                 node.l_child = Node(val, parent=node)
+                self.update_balance(node.l_child)
         else:
             if node is self.root:
                 self.r_size += 1
@@ -70,6 +72,80 @@ class BST(object):
                 self._insert(val, node.r_child)
             else:
                 node.r_child = Node(val, parent=node)
+                self.update_balance(node.r_child)
+
+    def update_balance(self, node):
+
+        if node.balance_factor < -1 or node.balance_factor > 1:
+            self.rebalance(node)
+            return
+        if node.parent != None:
+            if node.parent.l_child == node:
+                node.parent.balance_factor += 1
+            elif node.parent.r_child == node:
+                node.parent.balance_factor += -1
+            if node.parent.balance_factor != 0:
+                self.update_balance(node.parent)
+
+    def rotate_left(self, rotation_node):
+        new_rotation_node = rotation_node.r_child
+        rotation_node.r_child = new_rotation_node.l_child
+
+        if new_rotation_node.l_child != None:
+            new_rotation_node.l_child = rotation_node
+
+        new_rotation_node.parent = rotation_node.parent
+
+        if self.root == rotation_node:
+            self.root = new_rotation_node
+        else:
+            if rotation_node.parent.l_child == rotation_node:
+                rotation_node.parent.l_child = new_rotation_node
+            else:
+                rotation_node.r_child = new_rotation_node
+
+        new_rotation_node.l_child = rotation_node
+        rotation_node.parent = new_rotation_node
+
+        rotation_node.balance_factor = rotation_node.balance_factor + 1 - min(new_rotation_node.balance_factor, 0)
+        new_rotation_node.balance_factor = new_rotation_node.balance_factor + 1 + max(rotation_node.balance_factor, 0)
+
+    def rotate_right(self, rotation_node):
+        new_rotation_node = rotation_node.l_child
+        rotation_node.l_child = new_rotation_node.r_child
+
+        if new_rotation_node.r_child != None:
+            new_rotation_node.r_child = rotation_node
+
+        new_rotation_node.parent = rotation_node.parent
+
+        if self.root == rotation_node:
+            self.root = new_rotation_node
+        else:
+            if rotation_node.parent.r_child == rotation_node:
+                rotation_node.parent.r_child = new_rotation_node
+            else:
+                rotation_node.l_child = new_rotation_node
+
+        new_rotation_node.r_child = rotation_node
+        rotation_node.parent = new_rotation_node
+
+        rotation_node.balance_factor = rotation_node.balance_factor + 1 - min(new_rotation_node.balance_factor, 0)
+        new_rotation_node.balance_factor = new_rotation_node.balance_factor + 1 + max(rotation_node.balance_factor, 0)
+
+    def rebalance(self, node):
+        if node.balance_factor < 0:
+            if node.r_child.balance_factor > 0:
+                self.rotate_right(node.r_child)
+                self.rotate_left(node)
+            else:
+                self.rotate_left(node)
+        elif node.balance_factor > 0:
+            if node.l_child.balance_factor < 0:
+                self.rotate_left(node.l_child)
+                self.rotate_right(node)
+            else:
+                self.rotate_right(node)
 
     def contains(self, val):
         node = self.root
