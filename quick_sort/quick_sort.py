@@ -32,20 +32,15 @@ def quick_sort(unsorted_list):
             else:
                 greater.append(element)
         
-        quick_sort(less)
-        quick_sort(greater)
+        new_less = quick_sort(less)
+        new_greater = quick_sort(greater)
 
-        return less + equal + greater
+        return new_less + equal + new_greater
 
 
 if __name__ == '__main__':
-    from random import randint
+    best = [i for i in range(1000)]
+    worst = best[::-1]
 
-    random_list = []
-    for i in range(100):
-        a = [randint(1,100) for x in range(10*(i+1))]
-        random_list.append(a)
-
-    for a_list in random_list:
-        quick_sort(a_list)
-
+    quick_sort(best)
+    quick_sort(worst)
