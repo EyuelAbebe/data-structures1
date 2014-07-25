@@ -5,38 +5,30 @@ def time_it(method):
     def timed(a_list):
         time_start = time.time()
         result = method(a_list)
-        time_end = time.time()
-        
+        time_end = time.time() 
         list_length = len(a_list)
-        print '%r Sorted_list-length: %r in %2.2f sec' %(method.__name__, list_length, time_end - time_start)
+        print '%r Sorted_list-length: %r in %2.5f sec' %(method.__name__, list_length, time_end - time_start)
         
         return result
     return timed
 
 @time_it
 def insertion_sort(a_list):
-    for i in a_list:
-        temp_value = i
-        j = a_list.index(i) - 1
+    for i in range(1, len(a_list)):
+        temp_value = a_list[i]
+        j = i
 
-        while j>=0 and a_list[j] > temp_value:
-            a_list[j + 1] = a_list[j]
+        while j > 0 and a_list[j - 1] > temp_value:
+            a_list[j] = a_list[j - 1]
             j += -1
             
-        a_list[j + 1] = temp_value
+        a_list[j] = temp_value
 
     return a_list
 
 if __name__ == '__main__':
-    from random import randint
-    random_list = []
-    for i in range(10000):
-        a = [ randint(1, 100) for x in range(10*(i+1))]
-        random_list.append(a)
-    
-   # print random_list
+    best = [i for i in range(1000)]
+    worst = best[::-1]
 
-    for a_list in random_list:
-        insertion_sort(a_list)
-
-        #print a_list
+    insertion_sort(best)
+    insertion_sort(worst)
